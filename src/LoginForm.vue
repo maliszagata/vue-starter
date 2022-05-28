@@ -2,7 +2,7 @@
   <div>
     <label>Zaloguj się e-mailem</label>
     <input type="email" v-model="email" @keyup.enter = "enter()">
-    <button @click="enter()">{{ buttonLabel }}</button>
+    <button @click="enter()">{{ buttonLabelToDisplay }}</button>
   </div>
 </template>
 
@@ -16,9 +16,9 @@ export default {
     }
   },
 
-  mounted() {
-    if (!this.buttonLabel) {
-      this.buttonLabel = 'Zaloguj się';
+  computed: {
+    buttonLabelToDisplay() {
+      return this.buttonLabel || 'Zaloguj się';
     }
   },
 
