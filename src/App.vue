@@ -2,7 +2,7 @@
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
     <div v-if="logIn === false ">Zaloguj się e-mailem
-      <input type="text" v-model="email"></div>
+      <input type="text" v-model="email" @keyup.enter="enter()"></div>
     <div v-else-if="logIn === true "> Witaj {{email}}</div>
     <button @click="enter()">Wchodzę</button>
     <button @click="logOut()">Wyloguj</button>
