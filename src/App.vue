@@ -1,34 +1,38 @@
 <template>
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-    <div v-if="logIn === false ">Zaloguj się e-mailem
-      <input type="text" v-model="email" @keyup.enter="enter()"></div>
-    <div v-else-if="logIn === true "> Witaj {{email}}</div>
-    <button @click="enter()">Wchodzę</button>
-    <button @click="logOut()">Wyloguj</button>
+    <div v-if="!isLoggedIn">
+      <login-form @login="logIn($event)" button-label="Wejdź"></login-form>
+      <login-form @login="logIn($event)" button-label="Wleć"></login-form>
+      <login-form @login="logIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
+      <login-form @login="logIn($event)"  button-label=""></login-form>
+    </div>
+    <div v-else="isLoggedIn"> Witaj {{isLoggedIn}}
+      <button @click="logOut()">Wyloguj</button>
+    </div>
   </div>
 </template>
 
 <script>
 import "milligram";
-
+import LoginForm from "./LoginForm";
 
 export default {
+  components: {LoginForm},
+
   data() {
     return {
-      email: '',
-      logIn: false
+      isLoggedIn: false
     };
   },
 
   methods: {
-    enter() {
-      this.logIn = true
+    logIn(email) {
+      this.isLoggedIn = email
     },
 
     logOut() {
-      this.logIn = false
-      this.email = ''
+      this.isLoggedIn = false
     }
   }
 
